@@ -12,6 +12,8 @@ services:
     image: ghcr.io/dwikis17/portf:latest
     env_file:
       - .env
+    environment:
+      PORT: "3000"
     ports:
       - "4173:3000"
     restart: unless-stopped
