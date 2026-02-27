@@ -1,18 +1,25 @@
 services:
   backend:
     image: ghcr.io/dwikis17/heydwiki-backend:latest
-    env_file:
-      - .env.backend
+    environment:
+      DATABASE_URL: ${BACKEND_DATABASE_URL}
+      DIRECT_URL: ${BACKEND_DIRECT_URL}
+      PORT: ${BACKEND_PORT}
+      JWT_SECRET: ${BACKEND_JWT_SECRET}
+      JWT_EXPIRES_IN: ${BACKEND_JWT_EXPIRES_IN}
+      SUPABASE_URL: ${BACKEND_SUPABASE_URL}
+      SUPABASE_SERVICE_ROLE_KEY: ${BACKEND_SUPABASE_SERVICE_ROLE_KEY}
+      SUPABASE_STORAGE_BUCKET: ${BACKEND_SUPABASE_STORAGE_BUCKET}
     ports:
       - "4000:4000"
     restart: unless-stopped
 
   frontend:
     image: ghcr.io/dwikis17/portf:latest
-    env_file:
-      - .env.frontend
     environment:
-      PORT: "3000"
+      PORT: ${FRONTEND_PORT}
+      NEXT_PUBLIC_BACKEND_URL: ${FRONTEND_NEXT_PUBLIC_BACKEND_URL}
+      NEXT_PUBLIC_GA_MEASUREMENT_ID: ${FRONTEND_NEXT_PUBLIC_GA_MEASUREMENT_ID}
     ports:
       - "4173:3000"
     restart: unless-stopped
