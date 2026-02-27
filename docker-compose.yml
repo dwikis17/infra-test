@@ -2,16 +2,15 @@ services:
   backend:
     image: ghcr.io/dwikis17/heydwiki-backend:latest
     env_file:
-      - .env
+      - .env.backend
     ports:
       - "4000:4000"
     restart: unless-stopped
 
-
   frontend:
     image: ghcr.io/dwikis17/portf:latest
     env_file:
-      - .env
+      - .env.frontend
     environment:
       PORT: "3000"
     ports:
